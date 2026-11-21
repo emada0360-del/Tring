@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>تدريب الكبتشة</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&family=Poppins:wght@700&display=swap">
 <style>
 :root{--bg:#fff;--fg:#111;--key:#f6f6f6;--card:#eee;--ok:#1e9e4a;--bad:#e5484d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -27,8 +26,9 @@ canvas{width:100%;height:auto;aspect-ratio:2.2/1;border-radius:18px;background:v
 #toast{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) translateY(120%);color:#fff;padding:14px 22px;border-radius:14px;font-size:16px;transition:.25s;z-index:5;white-space:nowrap}
 #toast.show{transform:translateX(-50%) translateY(0)}
 #toast.ok{background:#1e9e4a}#toast.bad{background:#e5484d}
+/* order screen */
 body.gated{padding:8px 12px 8px;height:100dvh;overflow:hidden}
-body.gated>*:not(#gate):not(#topNote):not(#sndBtn):not(#toast){display:none!important}
+body.gated>*:not(#gate):not(#topNote):not(#sndBtn):not(#toast):not(#sheet){display:none!important}
 #gate{display:none;width:100%;flex:1;flex-direction:column;min-height:0;font-size:clamp(11px,1.85vh,15px);gap:1.1vh}
 body.gated #gate{display:flex}
 .sb{display:flex;justify-content:space-between;align-items:center;direction:ltr}
@@ -94,9 +94,48 @@ body.gated{height:100%}#gate{font-size:clamp(9px,min(1.45vh,3.3vw),13px)}.chip,.
 .sb{font-size:.88em}.sb .g{gap:.4em}.sp{padding:.5em .75em}
 #sndBtn{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:10px;width:34px;height:34px;border-radius:50%;border:0;background:#000;color:#fff;opacity:.75;z-index:8;display:flex;align-items:center;justify-content:center;padding:0}#sndBtn .i{width:20px;height:20px}
 body:not(.gated) .stats{margin-top:30px}
-body.gated{background:transparent}
 body.gated .card{background:rgba(15,15,15,.32)}
 body.waiting #gate{visibility:hidden}
+/* خط النظام العادي */
+html,body,button,select,.sp,.chip,.tag,.box,.redchip,.tabs,.avail,.fee,.warn,.gbtns button{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Arabic",Arial,sans-serif!important}
+.code,.pad button,.tag{font-family:Roboto,Arial,sans-serif!important}
+.chip,.tag,.box,.redchip,.tabs,.code,.rank b,.gbtns button{font-weight:600!important}
+.sp,.fee,.warn,.col small{font-weight:400!important}
+.avail{font-weight:700!important;font-size:1.5em!important}
+.tabs span{font-weight:600!important}
+.card{border-radius:1.2em!important}
+.chip{border-radius:.8em!important}
+.code{border-radius:.7em!important}
+.tag{border-radius:.6em!important}
+.box{border-radius:.6em!important;line-height:1.35!important}
+.redchip{border-radius:.8em!important}
+.warn{border-radius:.7em!important}
+.gbtns button{border-radius:.8em!important;height:2.8em!important}
+.tl:before{inset-inline-end:auto!important;inset-inline-start:1.05em!important;border-inline-end:0!important;border-inline-start:1px dotted #555!important;z-index:0}
+.ic{position:relative;z-index:1}
+html,body{overflow:hidden}
+/* شاشة إدخال الرقم (تملأ الشاشة بدون تمرير) */
+#sheet{display:none;position:fixed;z-index:6;bottom:0;top:11.6vh;top:11.6dvh;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#202020;border-radius:28px 28px 0 0;padding:0 7%;flex-direction:column;align-items:center;overflow:hidden;color:#fff}
+body.sheet #sheet{display:flex}
+body.waiting #sheet{display:none}
+#sheet .grab{width:30%;max-width:140px;height:5px;border-radius:3px;background:#555;margin:8px 0 0;flex:none}
+#sheet h1{font-size:min(5.7vw,3dvh);font-weight:700!important;margin:min(4.5vw,2.6dvh) 0 min(3vw,1.8dvh);text-align:center;flex:none}
+#sheet canvas{width:min(100%,40dvh);aspect-ratio:680/291;height:auto;border-radius:24px;background:#3a3a3a;flex:none}
+#sheet .info{width:100%;font-size:min(4.2vw,2dvh);line-height:1.5;margin-top:min(3vw,1.6dvh);text-align:start;flex:none;word-break:break-word}
+#sheet .display{height:min(14vw,6dvh);margin:min(2vw,1dvh) 0;letter-spacing:0;flex:none;font-size:min(9vw,4.4dvh);font-weight:700}
+#sheet .display span.ph{width:min(6vw,2.8dvh);height:min(6vw,2.8dvh);border-radius:50%;background:#4a2626;opacity:1;font-size:0;display:block}
+#sheet .pad{width:70%;max-width:340px;margin:0 auto;column-gap:12.5%;row-gap:min(3.4vw,1.4dvh);flex:none}
+#sheet .pad button{aspect-ratio:auto;max-height:none;height:min(7dvh,16vw);border-radius:22%;background:#181818;color:#fff;font-size:min(7.4vw,3.6dvh);font-weight:500!important}
+#sheet .pad button:active{background:#2c2c2c}
+#sheet .pad svg{width:36%}
+#cancel{margin-top:auto;margin-bottom:min(3vw,1.6dvh);border:0;background:none;color:#f44336;font:inherit;font-size:min(4.8vw,2.4dvh);font-weight:700;padding:.4em 1.5em}
+#gear{position:absolute;left:10px;top:14px;width:34px;height:34px;border-radius:50%;border:0;background:#333;color:#ddd;font-size:18px;padding:0}
+#panel{display:none;position:absolute;left:10px;top:54px;z-index:20;background:#2b2b2b;border-radius:14px;padding:12px;font-size:14px;direction:rtl;gap:8px;flex-direction:column;box-shadow:0 6px 20px #0008}
+#panel.open{display:flex}
+#panel .pr{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#panel select,#panel button{font:inherit;background:#3a3a3a;color:#fff;border:0;border-radius:8px;padding:4px 10px}
+#panel input[type=range]{width:110px;accent-color:#f44336}
+#panel .stats{opacity:1;gap:14px;font-size:13px;justify-content:flex-start;margin:0}
 </style>
 </head>
 <body class="gated">
@@ -136,20 +175,33 @@ body.waiting #gate{visibility:hidden}
       <div class="warn ind"><svg class="i"><use href="#i-map"/></svg><span>يرجى تأكيد موقع الزبون عند وصولك له, للمساهمة في تحسين دقة الموقع لك وللسواق الاخرين في المستقبل</span><div class="th"></div></div>
     </div>
   </div>
-  <div class="gbtns"><button id="yes">موافق</button><button id="no">الغاء الطلب</button></div>
+  <div class="gbtns"><button id="yes">موافق</button><button id="no">رفض الطلب</button></div>
   <div class="home"></div>
 </div>
 
-<div class="stats"><span>صحيح: <b id="ok">0</b></span><span>خطأ: <b id="bad">0</b></span><span>آخر وقت: <b id="t">-</b></span></div>
-<h1>للمتابعة ، أدخل الرقم</h1>
-<canvas id="c" width="680" height="309" title="اضغط لتغيير الصورة"></canvas>
-<div class="display" id="d"></div>
-<div class="row">عدد الأرقام:
-  <select id="n"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
-  <button id="r">تحديث ↻</button>
-  السرعة: <input id="limIn" type="range" min="0.15" max="1" step="0.05" value="0.5"><b id="limV">0.50</b>ث
+<div id="sheet">
+  <div class="grab"></div>
+  <button id="gear" aria-label="الإعدادات">⚙</button>
+  <div id="panel">
+    <div class="pr">عدد الأرقام:
+      <select id="n"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+      <button id="r">تحديث ↻</button>
+    </div>
+    <div class="pr">السرعة: <input id="limIn" type="range" min="0.15" max="1" step="0.05" value="0.5"><b id="limV">0.50</b>ث</div>
+    <div class="pr stats"><span>صحيح: <b id="ok">0</b></span><span>خطأ: <b id="bad">0</b></span><span>آخر وقت: <b id="t">-</b></span></div>
+  </div>
+  <h1>للمتابعة ، أدخل الرقم</h1>
+  <canvas id="c" width="680" height="291"></canvas>
+  <div class="info">
+    <div>رقم الطلب: <span id="iCode"></span></div>
+    <div>المطعم: <span id="iRest"></span></div>
+    <div>منطقة الزبون: <span id="iArea"></span></div>
+    <div>القيمة النهائية التي تقبضها من الزبون: <span id="iTotal"></span></div>
+  </div>
+  <div class="display" id="d"></div>
+  <div class="pad" id="pad"></div>
+  <button id="cancel">إلغاء</button>
 </div>
-<div class="pad" id="pad"></div>
 <button id="sndBtn" aria-label="الصوت"></button>
 <div id="topNote" class="pill"><svg class="pn" viewBox="0 0 24 24" style="color:#4caf50"><path fill="currentColor" d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.6" fill="#000"/></svg><span><span id="gArea"></span> - <span id="gCode"></span></span></div>
 <div id="toast"></div>
@@ -161,8 +213,10 @@ let code='',input='',start=0,ok=0,bad=0,lock=false,lim,LIMIT=500;
 const rnd=(a,b)=>Math.random()*(b-a)+a, pick=a=>a[Math.floor(Math.random()*a.length)];
 const $=id=>document.getElementById(id);
 
+/* ---- بيانات الطلب العشوائي (عدّلها كما تشاء) ---- */
 const AREAS=["جامعة ديالى", "جديدة الشط", "جرف الملح", "جلولاء", "جهاز مكافحة الارهاب", "جيزاني الامام", "حي التحرير", "الامين", "حي الجهاد", "حي الحديد", "حي السراي", "بهرز الثاني", "بهرز العبارة", "بهرز المثلث", "بهرز المنتريس", "بهرز المنثر", "بهرز باب الخان", "بهرز جرف الملح", "بهرز حي السلام", "بهرز حي الشرطة", "بهرز حي الفارس", "بهرز حي القادسية", "المرادية", "المطار", "الهاشمية ديالى", "اليرموك", "ام العظام", "ام الكرفس", "باب درب", "برغة", "بعقوبة الجديدة", "بعقوبة القديمة", "بهرز", "بهرز الخشالات", "بهرز الدواسر", "التكيه الثانية", "الجوبة", "الحويش", "الخالص", "السبتية", "السوامرة", "العبارة", "العثمانية", "الغالبية", "القمانية", "الكصيرين", "المجمع الصناعي", "المديرية العامة لتربية ديالى"];
 const RESTS=["مطعم العافية _ شارع خريسان", "مطعم واسماك العزاوي _ شارع خريسان", "سينما بوكس فود _ شارع خريسان", "مطعم تونه للاسماك البحرية والنهرية _ شارع خريسان", "مطعم كباب غلوبي الشهير _ شارع خريسان", "Restaurant and casino Saher _ شارع خريسان", "مطعم ومقهى مهدوني _ شارع خريسان", "Betzaland fast food _ شارع خريسان", "بيتزا هات _ شارع الطابو", "Diamond Restaurant _ شارع الطابو", "Khuttar Restaurant _ شارع الطابو", "Qidah Restaurant & Cafe _ شارع الطابو", "FireFly _ شارع الطابو", "مطعم وكافيه خلي ناكل _ شارع الطابو", "Abo Al Abed shawrma _ شارع الطابو", "99Grill _ شارع الطابو", "Chef Bashar restaurant _ شارع الطابو", "مطعم وكافيه مكان - Restaurant & Cafe Makan _ شارع الطابو", "Valkyrie Burger _ شارع الطابو", "7FRIDAYS _ شارع الطابو", "شيزا ديالى chizza diyala _ بعقوبة الجديدة"];
+const STREETS=['خريسان','المفرق','الكاطون','الجولان','المعلمين','الزراعة','الشفاء','الإسكان','المصلى','الصناعي','الضباط','السوق'];
 const FIRST=['رانيا','أحمد','محمد','علي','زينب','فاطمة','حسين','مصطفى','سارة','نور','عمر','يوسف','مريم','ليلى','كرار','حيدر','ضحى','هبة','مروة','سجاد'];
 const LAST=['كنعان','العزاوي','الجبوري','التميمي','الدليمي','الخزرجي','العبيدي','الساعدي','المشهداني','الزبيدي','الربيعي','الحمداني'];
 const L='abcdefghijklmnopqrstuvwxyz';
@@ -174,9 +228,10 @@ function nextArea(){
   $('gCode').textContent=$('gCode2').textContent=c;
   $('gFee').textContent=pick([1000,1250,1500,2000,2500,3000]).toLocaleString('en');
   $('gRank').textContent=Math.floor(rnd(1,25));
-  $('gRest').textContent='المطعم - '+pick(RESTS)+' / بعقوبة';
+  const rs=pick(RESTS)+' / بعقوبة';$('gRest').textContent='المطعم - '+rs;
+  $('iCode').textContent=c;$('iRest').textContent=rs;$('iArea').textContent=a;$('iTotal').textContent=(Math.round(rnd(5,30))*500).toLocaleString('en');
   $('gRd').textContent='يبعد عنك ('+rnd(.3,4.5).toFixed(1)+'km)';
-  $('gCust').textContent='الزبون - '+pick(FIRST)+' '+pick(LAST);
+  $('gCust').textContent='الزبون';
   $('gCd').textContent='يبعد عنك ('+Math.round(rnd(150,1500))+'m)';
   $('gPrev').textContent=Math.floor(rnd(0,150));
   popNote(4000);fit();say('طلب متوفر');
@@ -185,12 +240,13 @@ function timeUp(){
   if(lock)return;lock=true;failSay();bad++;$('bad').textContent=bad;$('t').textContent='>'+LIMIT/1000+'s';
   toast('✗ فشلت بالحصول على الطلب','bad');back();
 }
-function back(){setTimeout(()=>{lock=false;document.body.classList.add('gated','waiting');draw();clearTimeout(nt);clearTimeout(nt2);note.classList.remove('show','out');},350);setTimeout(()=>{document.body.classList.remove('waiting');nextArea();},1500);}
+function back(){setTimeout(()=>{lock=false;document.body.classList.remove('sheet');document.body.classList.add('waiting');draw();clearTimeout(nt);clearTimeout(nt2);note.classList.remove('show','out');},350);setTimeout(()=>{document.body.classList.remove('waiting');nextArea();},1500);}
 
+/* ---- الكبتشة ---- */
 function draw(){
   const len=+nSel.value;
   code='';for(let i=0;i<len;i++)code+=Math.floor(Math.random()*10);
-  g.clearRect(0,0,W,H);g.fillStyle='#eee';g.fillRect(0,0,W,H);
+  g.clearRect(0,0,W,H);g.fillStyle='#3a3a3a';g.fillRect(0,0,W,H);
   for(let i=0;i<900;i++){g.fillStyle=pick(cols);g.globalAlpha=rnd(.3,.8);g.beginPath();g.arc(rnd(0,W),rnd(0,H),rnd(1,2.6),0,7);g.fill();}
   g.globalAlpha=1;
   const step=W*0.8/len,x0=W*0.1+step/2,size=Math.min(150,step*1.15);
@@ -227,14 +283,16 @@ function press(k){
 const pad=$('pad');
 [1,2,3,4,5,6,7,8,9,0,'del'].forEach(k=>{
   const b=document.createElement('button');
-  if(k==='del'){b.setAttribute('aria-label','حذف');b.innerHTML='<svg viewBox="0 0 26 20"><path d="M8 1h15a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8L1 10z" fill="currentColor"/><path d="M11.5 6.5l8 7m0-7l-8 7" stroke="#f6f6f6" stroke-width="2.4" stroke-linecap="round"/></svg>';}else b.textContent=k;
+  if(k==='del'){b.setAttribute('aria-label','حذف');b.innerHTML='<svg viewBox="0 0 26 20"><path d="M8 1h15a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8L1 10z" fill="currentColor"/><path d="M11.5 6.5l8 7m0-7l-8 7" stroke="#181818" stroke-width="2.4" stroke-linecap="round"/></svg>';}else b.textContent=k;
   if(k===0)b.className='z';
   b.onclick=()=>press(String(k));pad.appendChild(b);
 });
 document.addEventListener('keydown',e=>{if(/^\d$/.test(e.key))press(e.key);else if(e.key==='Backspace')press('del');});
+$('gear').onclick=()=>$('panel').classList.toggle('open');
+$('cancel').onclick=()=>{$('panel').classList.remove('open');document.body.classList.remove('sheet');};
 cv.onclick=draw;$('r').onclick=draw;nSel.onchange=draw;
 $('limIn').oninput=e=>$('limV').textContent=(+e.target.value).toFixed(2);
-$('yes').onclick=()=>{const v=parseFloat($('limIn').value);LIMIT=v>0?Math.round(v*1000):500;extendNote(4000);document.body.classList.remove('gated');draw();};
+$('yes').onclick=()=>{const v=parseFloat($('limIn').value);LIMIT=v>0?Math.round(v*1000):500;extendNote(4000);document.body.classList.add('sheet');draw();};
 $('no').onclick=()=>{try{speechSynthesis.cancel();}catch(e){}nextArea();};
 let snd=true;try{if(localStorage.getItem('snd')==='0')snd=false;}catch(e){}
 const ICON_ON='<svg viewBox="0 0 24 24" class="i"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>';
