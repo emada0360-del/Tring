@@ -136,6 +136,15 @@ body.waiting #sheet{display:none}
 #panel select,#panel button{font:inherit;background:#3a3a3a;color:#fff;border:0;border-radius:8px;padding:4px 10px}
 #panel input[type=range]{width:110px;accent-color:#f44336}
 #panel .stats{opacity:1;gap:14px;font-size:13px;justify-content:flex-start;margin:0}
+/* إلغاء المساحة العلوية + إظهار لوحة الأرقام كلها */
+#sheet{top:7.9vh;top:7.9dvh}
+#sheet .grab{display:none}
+#sheet h1{margin:min(3.6vw,1.8dvh) 0 min(2.6vw,1.4dvh)}
+#sheet .info{font-size:min(4vw,1.9dvh);margin-top:min(2.6vw,1.3dvh)}
+#sheet .display{height:min(12vw,5.2dvh);margin:min(1.6vw,.8dvh) 0}
+#sheet .pad{flex:1 1 0;min-height:0;row-gap:min(3vw,1.3dvh);grid-template-rows:repeat(4,minmax(0,1fr))}
+#sheet .pad button{height:100%;max-height:min(8dvh,18vw);align-self:center}
+#cancel{flex:none;margin:min(1.6vw,.8dvh) 0 min(2.4vw,1.2dvh);padding:.3em 1.5em;font-size:min(4.8vw,2.3dvh)}
 </style>
 </head>
 <body class="gated">
