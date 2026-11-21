@@ -21,8 +21,6 @@ canvas{cursor:pointer}
 #toast{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) translateY(120%);color:#fff;padding:14px 22px;border-radius:14px;font-size:16px;transition:.25s;z-index:9;white-space:nowrap}
 #toast.show{transform:translateX(-50%) translateY(0)}
 #toast.ok{background:#1e9e4a}#toast.bad{background:#e5484d}
-
-/* ===== شاشة الطلب: كل المقاسات بوحدة u (= عرض الشاشة/612) مثل لقطة التطبيق ===== */
 #hdr{position:fixed;top:0;left:0;right:0;height:calc(var(--u)*87);background:#000;border-bottom:calc(var(--u)*1.5) solid #262626;z-index:4}
 #gate{width:100%;flex:1;min-height:0;display:flex;flex-direction:column;padding:0 calc(var(--u)*22) calc(var(--u)*4);font-size:calc(var(--u)*24);line-height:1.25}
 body.waiting #gate{visibility:hidden}
@@ -75,8 +73,8 @@ body.waiting #gate{visibility:hidden}
 .warn{flex:none;margin-top:calc(var(--u)*12);margin-inline-start:calc(var(--u)*50);display:flex;gap:calc(var(--u)*14);align-items:center;padding:calc(var(--u)*14) calc(var(--u)*16);border-radius:calc(var(--u)*14);background:#2b2118;color:#ff8a3d;font-size:calc(var(--u)*22);line-height:calc(var(--u)*34)}
 .warn>.i{width:calc(var(--u)*28);height:calc(var(--u)*28);color:#ff8a3d}
 .warn .th{width:calc(var(--u)*56);height:calc(var(--u)*56);flex:none;border-radius:calc(var(--u)*8);background:linear-gradient(135deg,#c2576b,#5a5a5a)}
-.gbtns{flex:none;display:flex;gap:calc(var(--u)*13);padding:calc(var(--u)*25) calc(var(--u)*23) calc(var(--u)*18);border-top:calc(var(--u)*1.5) solid #2a2a2a}
-.gbtns button{height:calc(var(--u)*67);border:0;border-radius:calc(var(--u)*14);color:#fff;font-size:calc(var(--u)*26);font-weight:700}
+.gbtns{flex:none;display:flex;gap:calc(var(--u)*13);margin:0 calc(var(--u)*23);padding:calc(var(--u)*25) 0 calc(var(--u)*22);border-top:calc(var(--u)*1.5) solid #2a2a2a}
+.gbtns button{height:calc(var(--u)*67);border:0;border-radius:calc(var(--u)*17);color:#fff;font-size:calc(var(--u)*34);font-weight:800;line-height:1;white-space:nowrap}
 #yes{flex:1.5;background:#4caf50}
 #no{flex:1;background:#f44336}
 #topNote{position:fixed;top:calc(var(--u)*16);left:50%;transform:translateX(-50%);display:none;z-index:7;align-items:center;flex-direction:row-reverse;gap:calc(var(--u)*12);height:calc(var(--u)*50);padding:0 calc(var(--u)*30);border-radius:calc(var(--u)*25);background:#000;color:#fff;font-size:calc(var(--u)*26);font-weight:600;white-space:nowrap}
@@ -87,21 +85,20 @@ body.waiting #gate{visibility:hidden}
 @keyframes noteOut{from{opacity:1;transform:translate(-50%,0)}to{opacity:0;transform:translate(-50%,-.6em)}}
 #sndBtn{position:fixed;top:calc(var(--u)*16);left:calc(var(--u)*14);width:calc(var(--u)*44);height:calc(var(--u)*44);border-radius:50%;border:0;background:#000;color:#fff;opacity:.75;z-index:8;display:flex;align-items:center;justify-content:center;padding:0}
 #sndBtn .i{width:calc(var(--u)*24);height:calc(var(--u)*24)}
-/* شاشة إدخال الرقم (تملأ الشاشة بدون تمرير) */
-#sheet{display:none;position:fixed;z-index:6;bottom:0;top:11.6vh;top:11.6dvh;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#202020;border-radius:28px 28px 0 0;padding:0 7%;flex-direction:column;align-items:center;overflow:hidden;color:#fff}
+#sheet{display:none;position:fixed;z-index:6;bottom:0;top:7.9vh;top:7.9dvh;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#202020;border-radius:28px 28px 0 0;padding:0 7%;flex-direction:column;align-items:center;overflow:hidden;color:#fff}
 body.sheet #sheet{display:flex}
 body.waiting #sheet{display:none}
-#sheet .grab{width:30%;max-width:140px;height:5px;border-radius:3px;background:#555;margin:8px 0 0;flex:none}
-#sheet h1{font-size:min(5.7vw,3dvh);font-weight:700!important;margin:min(4.5vw,2.6dvh) 0 min(3vw,1.8dvh);text-align:center;flex:none}
+#sheet .grab{display:none}
+#sheet h1{font-size:min(5.7vw,3dvh);font-weight:700!important;margin:min(3.6vw,1.8dvh) 0 min(2.6vw,1.4dvh);text-align:center;flex:none}
 #sheet canvas{width:min(100%,40dvh);aspect-ratio:680/291;height:auto;border-radius:24px;background:#3a3a3a;flex:none}
-#sheet .info{width:100%;font-size:min(4.2vw,2dvh);line-height:1.5;margin-top:min(3vw,1.6dvh);text-align:start;flex:none;word-break:break-word}
-#sheet .display{height:min(14vw,6dvh);margin:min(2vw,1dvh) 0;letter-spacing:0;flex:none;font-size:min(9vw,4.4dvh);font-weight:700}
+#sheet .info{width:100%;font-size:min(4vw,1.9dvh);line-height:1.5;margin-top:min(2.6vw,1.3dvh);text-align:start;flex:none;word-break:break-word}
+#sheet .display{height:min(12vw,5.2dvh);margin:min(1.6vw,.8dvh) 0;letter-spacing:0;flex:none;font-size:min(9vw,4.4dvh);font-weight:700}
 #sheet .display span.ph{width:min(6vw,2.8dvh);height:min(6vw,2.8dvh);border-radius:50%;background:#4a2626;opacity:1;font-size:0;display:block}
-#sheet .pad{width:70%;max-width:340px;margin:0 auto;column-gap:12.5%;row-gap:min(3.4vw,1.4dvh);flex:none}
-#sheet .pad button{aspect-ratio:auto;max-height:none;height:min(7dvh,16vw);border-radius:22%;background:#181818;color:#fff;font-size:min(7.4vw,3.6dvh);font-weight:500!important}
+#sheet .pad{width:70%;max-width:340px;margin:0 auto;column-gap:12.5%;row-gap:min(3vw,1.3dvh);flex:1 1 0;min-height:0;grid-template-rows:repeat(4,minmax(0,1fr))}
+#sheet .pad button{aspect-ratio:auto;max-height:min(8dvh,18vw);border-radius:22%;background:#181818;color:#fff;font-size:min(7.4vw,3.6dvh);font-weight:500!important;height:100%;align-self:center}
 #sheet .pad button:active{background:#2c2c2c}
 #sheet .pad svg{width:36%}
-#cancel{margin-top:auto;margin-bottom:min(3vw,1.6dvh);border:0;background:none;color:#f44336;font:inherit;font-size:min(4.8vw,2.4dvh);font-weight:700;padding:.4em 1.5em}
+#cancel{flex:none;margin:min(1.6vw,.8dvh) 0 min(2.4vw,1.2dvh);border:0;background:none;color:#f44336;font:inherit;font-size:min(4.8vw,2.3dvh);font-weight:700;padding:.3em 1.5em}
 #gear{position:absolute;left:10px;top:14px;width:34px;height:34px;border-radius:50%;border:0;background:#333;color:#ddd;font-size:18px;padding:0}
 #panel{display:none;position:absolute;left:10px;top:54px;z-index:20;background:#2b2b2b;border-radius:14px;padding:12px;font-size:14px;direction:rtl;gap:8px;flex-direction:column;box-shadow:0 6px 20px #0008}
 #panel.open{display:flex}
@@ -109,15 +106,6 @@ body.waiting #sheet{display:none}
 #panel select,#panel button{font:inherit;background:#3a3a3a;color:#fff;border:0;border-radius:8px;padding:4px 10px}
 #panel input[type=range]{width:110px;accent-color:#f44336}
 #panel .stats{opacity:1;gap:14px;font-size:13px;justify-content:flex-start;margin:0}
-/* إلغاء المساحة العلوية + إظهار لوحة الأرقام كلها */
-#sheet{top:7.9vh;top:7.9dvh}
-#sheet .grab{display:none}
-#sheet h1{margin:min(3.6vw,1.8dvh) 0 min(2.6vw,1.4dvh)}
-#sheet .info{font-size:min(4vw,1.9dvh);margin-top:min(2.6vw,1.3dvh)}
-#sheet .display{height:min(12vw,5.2dvh);margin:min(1.6vw,.8dvh) 0}
-#sheet .pad{flex:1 1 0;min-height:0;row-gap:min(3vw,1.3dvh);grid-template-rows:repeat(4,minmax(0,1fr))}
-#sheet .pad button{height:100%;max-height:min(8dvh,18vw);align-self:center}
-#cancel{flex:none;margin:min(1.6vw,.8dvh) 0 min(2.4vw,1.2dvh);padding:.3em 1.5em;font-size:min(4.8vw,2.3dvh)}
 </style>
 </head>
 <body class="gated">
@@ -191,7 +179,7 @@ body.waiting #sheet{display:none}
 <script>
 const cv=document.getElementById('c'),g=cv.getContext('2d'),W=cv.width,H=cv.height;
 const dEl=document.getElementById('d'),nSel=document.getElementById('n');
-const cols=['#e53935','#43a047','#1e88e5','#fb8c00','#8e24aa','#fdd835','#00acc1','#6d4c41','#d81b60'];
+const cols=['#e53935','#43a047','#1e88e5','#8e24aa','#fdd835','#00acc1','#6d4c41','#d81b60','#2e7d32'];
 let code='',input='',start=0,ok=0,bad=0,lock=false,lim,LIMIT=500;
 const rnd=(a,b)=>Math.random()*(b-a)+a, pick=a=>a[Math.floor(Math.random()*a.length)];
 const $=id=>document.getElementById(id);
@@ -199,7 +187,6 @@ const $=id=>document.getElementById(id);
 /* ---- بيانات الطلب العشوائي (عدّلها كما تشاء) ---- */
 const AREAS=["جامعة ديالى", "جديدة الشط", "جرف الملح", "جلولاء", "جهاز مكافحة الارهاب", "جيزاني الامام", "حي التحرير", "الامين", "حي الجهاد", "حي الحديد", "حي السراي", "بهرز الثاني", "بهرز العبارة", "بهرز المثلث", "بهرز المنتريس", "بهرز المنثر", "بهرز باب الخان", "بهرز جرف الملح", "بهرز حي السلام", "بهرز حي الشرطة", "بهرز حي الفارس", "بهرز حي القادسية", "المرادية", "المطار", "الهاشمية ديالى", "اليرموك", "ام العظام", "ام الكرفس", "باب درب", "برغة", "بعقوبة الجديدة", "بعقوبة القديمة", "بهرز", "بهرز الخشالات", "بهرز الدواسر", "التكيه الثانية", "الجوبة", "الحويش", "الخالص", "السبتية", "السوامرة", "العبارة", "العثمانية", "الغالبية", "القمانية", "الكصيرين", "المجمع الصناعي", "المديرية العامة لتربية ديالى"];
 const RESTS=["مطعم العافية _ شارع خريسان", "مطعم واسماك العزاوي _ شارع خريسان", "سينما بوكس فود _ شارع خريسان", "مطعم تونه للاسماك البحرية والنهرية _ شارع خريسان", "مطعم كباب غلوبي الشهير _ شارع خريسان", "Restaurant and casino Saher _ شارع خريسان", "مطعم ومقهى مهدوني _ شارع خريسان", "Betzaland fast food _ شارع خريسان", "بيتزا هات _ شارع الطابو", "Diamond Restaurant _ شارع الطابو", "Khuttar Restaurant _ شارع الطابو", "Qidah Restaurant & Cafe _ شارع الطابو", "FireFly _ شارع الطابو", "مطعم وكافيه خلي ناكل _ شارع الطابو", "Abo Al Abed shawrma _ شارع الطابو", "99Grill _ شارع الطابو", "Chef Bashar restaurant _ شارع الطابو", "مطعم وكافيه مكان - Restaurant & Cafe Makan _ شارع الطابو", "Valkyrie Burger _ شارع الطابو", "7FRIDAYS _ شارع الطابو", "شيزا ديالى chizza diyala _ بعقوبة الجديدة"];
-const STREETS=['خريسان','المفرق','الكاطون','الجولان','المعلمين','الزراعة','الشفاء','الإسكان','المصلى','الصناعي','الضباط','السوق'];
 const FIRST=['رانيا','أحمد','محمد','علي','زينب','فاطمة','حسين','مصطفى','سارة','نور','عمر','يوسف','مريم','ليلى','كرار','حيدر','ضحى','هبة','مروة','سجاد'];
 const LAST=['كنعان','العزاوي','الجبوري','التميمي','الدليمي','الخزرجي','العبيدي','الساعدي','المشهداني','الزبيدي','الربيعي','الحمداني'];
 const L='abcdefghijklmnopqrstuvwxyz';
@@ -226,21 +213,36 @@ function timeUp(){
 }
 function back(){setTimeout(()=>{lock=false;document.body.classList.remove('sheet');document.body.classList.add('waiting');draw();clearTimeout(nt);clearTimeout(nt2);note.classList.remove('show','out');},350);setTimeout(()=>{document.body.classList.remove('waiting');nextArea();},1500);}
 
-/* ---- الكبتشة ---- */
+/* ---- الكبتشة: خط عريض مستدير + ضجيج كثيف يشبه لقطات التطبيق ---- */
 function draw(){
   const len=+nSel.value;
   code='';for(let i=0;i<len;i++)code+=Math.floor(Math.random()*10);
   g.clearRect(0,0,W,H);g.fillStyle='#3a3a3a';g.fillRect(0,0,W,H);
-  for(let i=0;i<900;i++){g.fillStyle=pick(cols);g.globalAlpha=rnd(.3,.8);g.beginPath();g.arc(rnd(0,W),rnd(0,H),rnd(1,2.6),0,7);g.fill();}
+
+  // نقاط ضجيج كثيفة
+  for(let i=0;i<950;i++){g.fillStyle=pick(cols);g.globalAlpha=rnd(.35,.85);g.beginPath();g.arc(rnd(0,W),rnd(0,H),rnd(1,2.8),0,7);g.fill();}
   g.globalAlpha=1;
-  const step=W*0.8/len,x0=W*0.1+step/2,size=Math.min(150,step*1.15);
-  for(let i=0;i<len;i++){
-    g.save();g.translate(x0+i*step+rnd(-8,8),H/2+rnd(-25,25));g.rotate(rnd(-.35,.35));
-    g.font='900 '+size+'px Arial,sans-serif';g.textAlign='center';g.textBaseline='middle';
-    g.fillStyle=pick(cols);g.fillText(code[i],0,0);g.restore();
+
+  // خطوط ضجيج أطول وأكثر (مثل اللقطات: 10-15 خط)
+  const nLines=Math.floor(rnd(10,15));
+  for(let i=0;i<nLines;i++){
+    g.strokeStyle=pick(cols);g.lineWidth=rnd(1.5,3);g.globalAlpha=rnd(.7,.95);
+    g.beginPath();g.moveTo(rnd(-30,W+30),rnd(-30,H+30));g.lineTo(rnd(-30,W+30),rnd(-30,H+30));g.stroke();
   }
-  for(let i=0;i<9;i++){g.strokeStyle=pick(cols);g.lineWidth=rnd(2,4);g.globalAlpha=.85;g.beginPath();g.moveTo(rnd(0,W),rnd(0,H));g.lineTo(rnd(0,W),rnd(0,H));g.stroke();}
   g.globalAlpha=1;
+
+  // الأرقام: خط عريض مستدير الحواف
+  const step=W*0.8/len,x0=W*0.1+step/2,size=Math.min(170,step*1.25);
+  for(let i=0;i<len;i++){
+    g.save();g.translate(x0+i*step+rnd(-6,6),H/2+rnd(-18,18));g.rotate(rnd(-.22,.22));
+    g.font='900 '+size+'px "Arial Rounded MT Bold","Helvetica Rounded",Arial,sans-serif';
+    g.textAlign='center';g.textBaseline='middle';
+    g.lineJoin='round';g.lineCap='round';
+    g.strokeStyle='rgba(0,0,0,.25)';g.lineWidth=size*0.08;g.strokeText(code[i],0,0);
+    g.fillStyle=pick(cols);g.fillText(code[i],0,0);
+    g.restore();
+  }
+
   input='';render();start=performance.now();clearTimeout(lim);
 }
 function render(){
