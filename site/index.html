@@ -74,7 +74,7 @@ body.waiting #gate{visibility:hidden}
 .warn>.i{width:calc(var(--u)*28);height:calc(var(--u)*28);color:#ff8a3d}
 .warn .th{width:calc(var(--u)*56);height:calc(var(--u)*56);flex:none;border-radius:calc(var(--u)*8);background:linear-gradient(135deg,#c2576b,#5a5a5a)}
 .gbtns{flex:none;display:flex;gap:calc(var(--u)*13);margin:0 calc(var(--u)*23);padding:calc(var(--u)*25) 0 calc(var(--u)*22);border-top:calc(var(--u)*1.5) solid #2a2a2a}
-.gbtns button{height:calc(var(--u)*67);border:0;border-radius:calc(var(--u)*17);color:#fff;font-size:calc(var(--u)*34);font-weight:800;line-height:1;white-space:nowrap}
+.gbtns button{height:calc(var(--u)*67);border:0;border-radius:calc(var(--u)*21);color:#fff;font-size:calc(var(--u)*32);font-weight:700;line-height:1;white-space:nowrap}
 #yes{flex:1.5;background:#4caf50}
 #no{flex:1;background:#f44336}
 #topNote{position:fixed;top:calc(var(--u)*16);left:50%;transform:translateX(-50%);display:none;z-index:7;align-items:center;flex-direction:row-reverse;gap:calc(var(--u)*12);height:calc(var(--u)*50);padding:0 calc(var(--u)*30);border-radius:calc(var(--u)*25);background:#000;color:#fff;font-size:calc(var(--u)*26);font-weight:600;white-space:nowrap}
@@ -219,29 +219,46 @@ function draw(){
   code='';for(let i=0;i<len;i++)code+=Math.floor(Math.random()*10);
   g.clearRect(0,0,W,H);g.fillStyle='#3a3a3a';g.fillRect(0,0,W,H);
 
-  // نقاط ضجيج كثيفة
-  for(let i=0;i<950;i++){g.fillStyle=pick(cols);g.globalAlpha=rnd(.35,.85);g.beginPath();g.arc(rnd(0,W),rnd(0,H),rnd(1,2.8),0,7);g.fill();}
-  g.globalAlpha=1;
+  // 1) نقاط ضجيج كثيفة (خلفية)
+  const dots=n=>{for(let i=0;i<n;i++){g.fillStyle=pick(cols);g.globalAlpha=rnd(.45,.9);g.beginPath();g.arc(rnd(0,W),rnd(0,H),rnd(.9,2.4),0,7);g.fill();}g.globalAlpha=1;};
+  dots(950);
 
-  // خطوط ضجيج أطول وأكثر (مثل اللقطات: 10-15 خط)
-  const nLines=Math.floor(rnd(10,15));
+  // 2) الأرقام: مرسومة يدوياً بخط عريض بحواف حادة (نفس أشكال التطبيق) + ميلان + تعرّج
+  const DC=['#2196f3','#ff4d4d','#4caf50','#ffc107','#7c4dff','#e040fb'];
+  const GL={
+    0:o=>{o.ellipse(0,0,24,41,0,0,6.2832)},
+    1:o=>{o.moveTo(6,-46);o.lineTo(6,42);o.moveTo(8,-44);o.lineTo(-26,-18);o.moveTo(-26,42);o.lineTo(36,42)},
+    2:o=>{o.moveTo(-26,-26);o.bezierCurveTo(-26,-56,26,-56,26,-26);o.lineTo(-28,40);o.lineTo(32,40)},
+    3:o=>{o.moveTo(-26,-34);o.bezierCurveTo(-20,-58,26,-52,24,-28);o.bezierCurveTo(22,-10,2,-6,-8,-6);o.moveTo(-8,-6);o.bezierCurveTo(30,-8,34,36,0,42);o.bezierCurveTo(-14,44,-26,38,-30,28)},
+    4:o=>{o.moveTo(14,46);o.lineTo(14,-44);o.lineTo(-30,18);o.lineTo(34,18)},
+    5:o=>{o.moveTo(30,-42);o.lineTo(-18,-42);o.lineTo(-24,-6);o.bezierCurveTo(-8,-14,30,-8,30,18);o.bezierCurveTo(30,46,-12,50,-30,32)},
+    6:o=>{o.moveTo(24,-44);o.bezierCurveTo(-6,-46,-28,-16,-26,16);o.moveTo(26,18);o.ellipse(0,18,26,26,0,0,6.2832)},
+    7:o=>{o.moveTo(-34,-20);o.lineTo(-34,-44);o.lineTo(32,-44);o.lineTo(22,46)},
+    8:o=>{o.ellipse(0,-26,18,18,0,0,6.2832);o.moveTo(22,22);o.ellipse(0,22,22,20,0,0,6.2832)},
+    9:o=>{o.ellipse(0,-18,24,24,0,0,6.2832);o.moveTo(24,-18);o.bezierCurveTo(26,12,22,44,-6,44);o.lineTo(-24,34)}
+  };
+  const step=W*0.8/len,x0=W*0.1+step/2,k=Math.min(1.05,step/88);
+  const sz=150,oc=document.createElement('canvas');oc.width=oc.height=sz;
+  const o=oc.getContext('2d');
+  for(let i=0;i<len;i++){
+    o.clearRect(0,0,sz,sz);o.save();o.translate(sz/2,sz/2);o.scale(k,k);
+    o.strokeStyle=pick(DC);o.lineWidth=19;o.lineCap='butt';o.lineJoin='miter';o.miterLimit=10;
+    o.beginPath();GL[code[i]](o);o.stroke();o.restore();
+    const amp=rnd(1.5,3.5),fr=rnd(.04,.08),ph=rnd(0,6.28);
+    g.save();g.translate(x0+i*step+rnd(-6,6),H/2+rnd(-16,16));
+    g.rotate(rnd(-.6,.6));g.transform(1,0,rnd(-.25,.25),1,0,0);
+    for(let x=0;x<sz;x++){g.drawImage(oc,x,0,1,sz,x-sz/2,-sz/2+amp*Math.sin(x*fr+ph),1.3,sz);}
+    g.restore();
+  }
+
+  // 3) خطوط الضجيج فوق الأرقام (مثل اللقطات)
+  const nLines=Math.floor(rnd(9,14));
   for(let i=0;i<nLines;i++){
-    g.strokeStyle=pick(cols);g.lineWidth=rnd(1.5,3);g.globalAlpha=rnd(.7,.95);
+    g.strokeStyle=pick(cols);g.lineWidth=rnd(1.4,2.6);g.globalAlpha=rnd(.8,1);
     g.beginPath();g.moveTo(rnd(-30,W+30),rnd(-30,H+30));g.lineTo(rnd(-30,W+30),rnd(-30,H+30));g.stroke();
   }
   g.globalAlpha=1;
-
-  // الأرقام: خط عريض مستدير الحواف
-  const step=W*0.8/len,x0=W*0.1+step/2,size=Math.min(170,step*1.25);
-  for(let i=0;i<len;i++){
-    g.save();g.translate(x0+i*step+rnd(-6,6),H/2+rnd(-18,18));g.rotate(rnd(-.22,.22));
-    g.font='900 '+size+'px "Arial Rounded MT Bold","Helvetica Rounded",Arial,sans-serif';
-    g.textAlign='center';g.textBaseline='middle';
-    g.lineJoin='round';g.lineCap='round';
-    g.strokeStyle='rgba(0,0,0,.25)';g.lineWidth=size*0.08;g.strokeText(code[i],0,0);
-    g.fillStyle=pick(cols);g.fillText(code[i],0,0);
-    g.restore();
-  }
+  dots(140);
 
   input='';render();start=performance.now();clearTimeout(lim);
 }
